@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, StatusBar } from "react-native";
 import styles from "./styles";
 import MenuImage from "../../components/MenuImage/MenuImage";
 import { db, auth } from "../Login/LoginScreen";
-import { doc, getDoc, collection } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function HomeScreen(props) {
   const { navigation } = props;

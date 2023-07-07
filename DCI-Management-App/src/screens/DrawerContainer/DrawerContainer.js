@@ -3,14 +3,26 @@ import { View, Alert, Text } from "react-native";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import MenuButton from "../../components/MenuButton/MenuButton";
-import { auth } from "../Login/LoginScreen";
+import { doc, updateDoc } from 'firebase/firestore';
+import { auth, db } from "../Login/LoginScreen";
 
 export default function DrawerContainer(props) {
   const [isProductionGroupOpen, setIsProductionGroupOpen] = useState(false);
   const [isMarketingGroupOpen, setIsMarketingGroupOpen] = useState(false);
   const [isAnalyticsGroupOpen, setIsAnalyticsGroupOpen] = useState(false);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        await updateDoc(doc(db, 'Users', user.uid), {
+          Log: "OFF",
+        });
+      } catch (error) {
+        console.log("Error updating user log:", error);
+      }
+    }
+  
     auth
       .signOut()
       .then(() => {
