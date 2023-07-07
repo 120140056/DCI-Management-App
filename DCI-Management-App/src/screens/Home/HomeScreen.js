@@ -60,9 +60,6 @@ export default function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {setShowAnimation(true)}}>
-        <Text>Show Animation</Text>
-      </TouchableOpacity>
       {showAnimation && <ToastNotification userName={userName} />}
 
       <TouchableOpacity style={styles.addButton} onPress={handleAddOrder}>
